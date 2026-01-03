@@ -1,0 +1,145 @@
+{
+  "employees": {
+    "Samuel Aldrich": {
+      "msrs": ["TO1"],
+      "charge_codes": {
+        "Athena TO1 Ext Telework": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 11,
+          "description": "Athena TO1 Ext Telework"
+        },
+        "Athena TO1 Ext": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 14,
+          "description": "Athena TO1 Ext OnSite"
+        }
+      }
+    },
+    "Keith Mosley": {
+      "msrs": ["TO1"],
+      "charge_codes": {
+        "Athena TO1 Ext Telework": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 12,
+          "description": "Athena TO1 Ext Telework"
+        },
+        "Athena TO1 Ext": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 15,
+          "description": "Athena TO1 Ext OnSite"
+        }
+      }
+    },
+    "Samuel Martin": {
+      "msrs": ["TO1"],
+      "charge_codes": {
+        "Athena TO1 Ext Telework": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 13,
+          "description": "Athena TO1 Ext Telework"
+        },
+        "Athena TO1 Ext": {
+          "msr": "TO1",
+          "sheet": "Extension Period MSR",
+          "row": 16,
+          "description": "Athena TO1 Ext OnSite"
+        }
+      }
+    },
+    "Matthew Nicely": {
+      "msrs": ["TO4"],
+      "charge_codes": {
+        "AB11662.004.03.0040.0011000 ATO4 1AD SEIT": {
+          "msr": "TO4",
+          "sheet": "CLIN 0001AD",
+          "row": 6,
+          "description": "ATO4 1AD SEIT"
+        },
+        "AB11662.004.03.0041.0001000 ATO4-2AD 22 O&M": {
+          "msr": "TO4",
+          "sheet": "CLIN 0002AD",
+          "row": 6,
+          "description": "ATO4-2AD 22 O&M"
+        }
+      }
+    },
+    "Greg Mihokovich": {
+      "msrs": ["TO4"],
+      "charge_codes": {
+        "AB11662.004.03.0040.0003001 ATO4 1AD 20 APP HOST ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0001AD",
+          "row": 12,
+          "description": "ATO4 1AD 20 APP HOST ACG - Software Engineer Sr"
+        },
+        "AB11662.004.03.0041.0001002 ATO4-2AD 22 O&M ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0002AD",
+          "row": 10,
+          "description": "ATO4-2AD 22 O&M ACG - Software Engineer Sr"
+        }
+      }
+    },
+    "Neil Franklin": {
+      "msrs": ["TO4"],
+      "charge_codes": {
+        "AB11662.004.03.0040.0011001 ATO4 1AD SEIT ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0001AD",
+          "row": 29,
+          "description": "ATO4 1AD SEIT ACG"
+        },
+        "AB11662.004.03.0041.0001001 ATO4-2AD 22 O&M ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0002AD",
+          "row": 14,
+          "description": "ATO4-2AD 22 O&M ACG"
+        }
+      }
+    },
+    "Ryan Robertson": {
+      "msrs": ["TO4"],
+      "charge_codes": {
+        "AB11662.004.03.0040.0003001 ATO4 1AD 20 APP HOST ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0001AD",
+          "row": 39,
+          "description": "ATO4 1AD 20 APP HOST ACG"
+        },
+        "AB11662.004.03.0041.0001001 ATO4-2AD 22 O&M ACG": {
+          "msr": "TO4",
+          "sheet": "CLIN 0002AD",
+          "row": 12,
+          "description": "ATO4-2AD 22 O&M ACG"
+        }
+      }
+    },
+    "Rachel Palmer": {
+      "msrs": ["TO6"],
+      "charge_codes": {
+        "Athena TO6 CLIN 0005": {
+          "msr": "TO6",
+          "sheet": "Option 4 MSR",
+          "row": 11,
+          "description": "Systems Engineer, Mid"
+        }
+      }
+    },
+    "Daniel Quillen": {
+      "msrs": ["TO6"],
+      "charge_codes": {
+        "Athena TO6 CLIN 0005": {
+          "msr": "TO6",
+          "sheet": "Option 4 MSR",
+          "row": 12,
+          "description": "Software Engineer, Sr"
+        }
+      }
+    }
+  }
+}

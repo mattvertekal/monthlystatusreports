@@ -1,0 +1,45 @@
+{
+  "TO1": {
+    "name": "Athena TO1",
+    "sheet_name": "Extension Period MSR",
+    "status_row": 3,
+    "total_row": 17,
+    "date_header_row": 4,
+    "fill_behavior": "match_previous_column",
+    "description": "Athena TO1 Extension Period MSR"
+  },
+  "TO4": {
+    "name": "Athena TO4 PIVOT",
+    "sheets": {
+      "CLIN 0001AD": {
+        "status_row": 3,
+        "date_header_row": 4,
+        "fill_range": {
+          "start": 3,
+          "end": 54
+        },
+        "fill_behavior": "match_previous_column_for_status",
+        "description": "Development CLIN"
+      },
+      "CLIN 0002AD": {
+        "status_row": 3,
+        "date_header_row": 4,
+        "fill_range": {
+          "start": 3,
+          "end": 15
+        },
+        "fill_behavior": "match_previous_column_for_status",
+        "description": "O&M CLIN"
+      }
+    },
+    "description": "Athena TO4 PIVOT MSR with multiple CLINs"
+  },
+  "TO6": {
+    "name": "Athena TO6",
+    "sheet_name": "Option 4 MSR",
+    "status_row": 3,
+    "date_header_row": 4,
+    "fill_behavior": "match_previous_column",
+    "description": "Athena TO6 Runway Option 4 MSR"
+  }
+}

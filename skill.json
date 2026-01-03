@@ -1,0 +1,28 @@
+{
+  "name": "update-msrs",
+  "description": "Update Monthly Status Reports (MSRs) with timesheet data",
+  "version": "1.0.0",
+  "author": "Matthew Nicely",
+  "repository": "https://github.com/mattvertekal/monthlystatusreports",
+  "instructions": "This skill updates Athena TO1, TO4, and TO6 Monthly Status Reports with timesheet data from TSheets. The user will provide: (1) timesheet CSV export, (2) current MSR files for TO1, TO4, and TO6, and (3) the month to update (e.g., 'Jan-26'). The skill will parse the timesheet, find the correct column in each MSR, and update all employee hours with proper formatting and colors.",
+  "trigger_patterns": [
+    "update msrs",
+    "update the msrs",
+    "update monthly status reports",
+    "process timesheet",
+    "update msr"
+  ],
+  "required_files": [
+    "timesheet CSV",
+    "TO1 MSR",
+    "TO4 MSR",
+    "TO6 MSR"
+  ],
+  "parameters": {
+    "month": {
+      "description": "Month to update (e.g., 'Jan-26', 'February 2026')",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
