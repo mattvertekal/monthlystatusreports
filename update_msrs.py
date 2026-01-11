@@ -27,12 +27,33 @@ MSR_BASE_DIR = Path.home() / "Documents" / "MSRs"
 TEMPLATES_DIR = MSR_BASE_DIR / "templates"
 COMPLETED_DIR = MSR_BASE_DIR / "completed"
 
-# MSR file patterns
+# MSR file patterns (for finding files)
 MSR_PATTERNS = {
     "TO1": ["TO1", "Athena TO1"],
     "TO4": ["TO4", "Athena TO4", "PIVOT"],
     "TO6": ["TO6", "Athena TO6"]
 }
+
+# MSR output naming conventions
+# TO1: "Athena TO1 Vertekal MSR Dec 2025.xlsx"
+# TO4: "Athena TO4_PIVOT_OP3_Vertekal MSR_2025.12.xlsx"
+# TO6: "Athena TO6 Vertekal MSR Opt3 December 2025.xlsx"
+def get_msr_output_filename(msr_type: str, year: int, month: int) -> str:
+    """Generate output filename matching the established naming convention."""
+    from datetime import datetime
+    dt = datetime(year, month, 1)
+
+    if msr_type == "TO1":
+        # Format: "Athena TO1 Vertekal MSR Dec 2025.xlsx"
+        return f"Athena TO1 Vertekal MSR {dt.strftime('%b')} {year}.xlsx"
+    elif msr_type == "TO4":
+        # Format: "Athena TO4_PIVOT_OP3_Vertekal MSR_2025.12.xlsx"
+        return f"Athena TO4_PIVOT_OP3_Vertekal MSR_{year}.{month:02d}.xlsx"
+    elif msr_type == "TO6":
+        # Format: "Athena TO6 Vertekal MSR Opt3 December 2025.xlsx"
+        return f"Athena TO6 Vertekal MSR Opt3 {dt.strftime('%B')} {year}.xlsx"
+    else:
+        return f"{msr_type}_MSR_{year}-{month:02d}.xlsx"
 
 
 def get_previous_month(year: int, month: int) -> Tuple[int, int]:
@@ -181,7 +202,7 @@ def update_all_msrs(
 
         if col1:
             print(f"   Found column: {col1}")
-            output1 = output_dir / f"TO1_MSR_{month_display}.xlsx"
+            output1 = output_dir / get_msr_output_filename("TO1", target_year, target_month)
             result1 = update_to1_msr(to1_msr, timesheet_data, col1, str(output1))
             results['TO1'] = result1
             print(f"   Updated {result1['total_hours']:.2f} hours")
@@ -207,7 +228,7 @@ def update_all_msrs(
 
         if col4:
             print(f"   Found column: {col4}")
-            output4 = output_dir / f"TO4_MSR_{month_display}.xlsx"
+            output4 = output_dir / get_msr_output_filename("TO4", target_year, target_month)
             result4 = update_to4_msr(to4_msr, timesheet_data, col4, str(output4))
             results['TO4'] = result4
             print(f"   CLIN 0001AD: {result4['clin_0001ad_hours']:.2f} hours")
@@ -235,7 +256,7 @@ def update_all_msrs(
 
         if col6:
             print(f"   Found column: {col6}")
-            output6 = output_dir / f"TO6_MSR_{month_display}.xlsx"
+            output6 = output_dir / get_msr_output_filename("TO6", target_year, target_month)
             result6 = update_to6_msr(to6_msr, timesheet_data, col6, str(output6))
             results['TO6'] = result6
             print(f"   Updated {result6['total_hours']:.2f} hours")
