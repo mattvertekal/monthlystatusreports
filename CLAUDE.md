@@ -22,8 +22,7 @@ monthlystatusreports/
 │   ├── to1_updater.py     # Athena TO1 MSR updater
 │   ├── to4_updater.py     # Athena TO4 MSR updater
 │   ├── to6_updater.py     # Athena TO6 MSR updater
-│   ├── emmett_updater.py  # Emmett/Magni HA updater
-│   └── wsr_updater.py     # Weekly Status Report updater
+│   └── wsr_updater.py     # Weekly Status Report updater (handles Emmett)
 ├── config/
 │   ├── employee_mappings.json  # Employee -> charge code -> row mappings
 │   ├── msr_settings.json       # MSR sheet configurations

@@ -30,7 +30,7 @@
 │ • TO1 Updater     │   │ WEEKLY MODE:      │   │ • Pull hours from TSheets │
 │ • TO4 Updater     │   │ • Update CLIN     │   │ • Calculate: hrs × rate   │
 │ • TO6 Updater     │   │   Level Detail    │   │ • Preview invoice lines   │
-│ • Emmett Updater  │   │ • Estimate→Actual │   │ • Update QBO invoice      │
+│                   │   │ • Estimate→Actual │   │ • Update QBO invoice      │
 │                   │   │ • Apply highlight │   │                           │
 │ Input: Previous   │   │                   │   │ Connects to:              │
 │   month's MSR     │   │ MONTHLY MODE:     │   │ QuickBooks Online API     │
