@@ -112,7 +112,8 @@ def find_latest_wsr() -> Optional[Path]:
     for _ in range(8):  # Search up to 8 quarters back
         folder = COMPLETED_DIR / str(year) / f"Q{quarter}"
         if folder.exists():
-            files = sorted(folder.glob("*.xlsb"), reverse=True)
+            # Filter out temp files (starting with ~$)
+            files = sorted([f for f in folder.glob("*.xlsb") if not f.name.startswith("~$")], reverse=True)
             if files:
                 return files[0]
 
