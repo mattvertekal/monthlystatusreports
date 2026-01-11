@@ -28,6 +28,7 @@ Thumbs.db
 *.xls
 !examples/*.csv
 !examples/*.xlsx
+config/tsheets_config.json
 
 # Temporary files
 *.tmp

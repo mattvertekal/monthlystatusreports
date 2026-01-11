@@ -140,6 +140,43 @@
           "description": "Software Engineer, Sr"
         }
       }
+    },
+    "David Thompson": {
+      "msrs": ["Emmett"],
+      "tsheets_id": "8499572",
+      "charge_codes": {
+        "Emmett – Magni HA – R2026Q1": {
+          "msr": "Emmett",
+          "sheet": "CLIN Level Detail",
+          "row": 4,
+          "description": "Magni HA"
+        }
+      }
+    },
+    "Nathan Ruf": {
+      "msrs": ["Emmett"],
+      "tsheets_id": "8131040",
+      "charge_codes": {
+        "Emmett – Magni HA – R2026Q1": {
+          "msr": "Emmett",
+          "sheet": "CLIN Level Detail",
+          "row": 5,
+          "description": "Emmett (Magni HA)"
+        }
+      }
+    },
+    "Philip Yang": {
+      "msrs": ["Emmett"],
+      "tsheets_id": null,
+      "charge_codes": {
+        "Emmett – Magni HA – R2026Q1": {
+          "msr": "Emmett",
+          "sheet": "CLIN Level Detail",
+          "row": 6,
+          "description": "Magni HA",
+          "notes": "Starting Jan 20, 2026"
+        }
+      }
     }
   }
 }
