@@ -52,7 +52,7 @@
       }
     },
     "Matthew Nicely": {
-      "msrs": ["TO4"],
+      "msrs": ["TO4", "TO8"],
       "charge_codes": {
         "AB11662.004.03.0040.0011000 ATO4 1AD SEIT": {
           "msr": "TO4",
@@ -65,11 +65,23 @@
           "sheet": "CLIN 0002AD",
           "row": 6,
           "description": "ATO4-2AD 22 O&M"
+        },
+        "ATO8 CLIN 0001AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0001AA",
+          "row": 5,
+          "description": "Systems Engineer - Sr"
+        },
+        "ATO8 CLIN 0002AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0002AA",
+          "row": 5,
+          "description": "Systems Engineer - Sr"
         }
       }
     },
     "Greg Mihokovich": {
-      "msrs": ["TO4"],
+      "msrs": ["TO4", "TO8"],
       "charge_codes": {
         "AB11662.004.03.0040.0003001 ATO4 1AD 20 APP HOST ACG": {
           "msr": "TO4",
@@ -82,11 +94,23 @@
           "sheet": "CLIN 0002AD",
           "row": 10,
           "description": "ATO4-2AD 22 O&M ACG - Software Engineer Sr"
+        },
+        "ATO8 CLIN 0001AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0001AA",
+          "row": 6,
+          "description": "Software Engineer - Sr"
+        },
+        "ATO8 CLIN 0002AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0002AA",
+          "row": 6,
+          "description": "Software Engineer - Sr"
         }
       }
     },
     "Neil Franklin": {
-      "msrs": ["TO4"],
+      "msrs": ["TO4", "TO8"],
       "charge_codes": {
         "AB11662.004.03.0040.0011001 ATO4 1AD SEIT ACG": {
           "msr": "TO4",
@@ -99,11 +123,23 @@
           "sheet": "CLIN 0002AD",
           "row": 14,
           "description": "ATO4-2AD 22 O&M ACG"
+        },
+        "ATO8 CLIN 0001AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0001AA",
+          "row": 7,
+          "description": "IA Engineer - Mid"
+        },
+        "ATO8 CLIN 0002AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0002AA",
+          "row": 7,
+          "description": "IA Engineer - Mid"
         }
       }
     },
     "Ryan Robertson": {
-      "msrs": ["TO4"],
+      "msrs": ["TO4", "TO8"],
       "charge_codes": {
         "AB11662.004.03.0040.0003001 ATO4 1AD 20 APP HOST ACG": {
           "msr": "TO4",
@@ -116,6 +152,18 @@
           "sheet": "CLIN 0002AD",
           "row": 12,
           "description": "ATO4-2AD 22 O&M ACG"
+        },
+        "ATO8 CLIN 0001AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0001AA",
+          "row": 8,
+          "description": "Software Engineer - Sr"
+        },
+        "ATO8 CLIN 0002AA": {
+          "msr": "TO8",
+          "sheet": "CLIN 0002AA",
+          "row": 8,
+          "description": "Software Engineer - Sr"
         }
       }
     },

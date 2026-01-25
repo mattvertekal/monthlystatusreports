@@ -42,6 +42,32 @@
     "fill_behavior": "match_previous_column",
     "description": "Athena TO6 Runway Option 4 MSR"
   },
+  "TO8": {
+    "name": "Athena TO8",
+    "sheets": {
+      "CLIN 0001AA": {
+        "status_row": 3,
+        "date_header_row": 4,
+        "fill_range": {
+          "start": 3,
+          "end": 10
+        },
+        "fill_behavior": "match_previous_column_for_status",
+        "description": "CLIN 0001AA"
+      },
+      "CLIN 0002AA": {
+        "status_row": 3,
+        "date_header_row": 4,
+        "fill_range": {
+          "start": 3,
+          "end": 10
+        },
+        "fill_behavior": "match_previous_column_for_status",
+        "description": "CLIN 0002AA"
+      }
+    },
+    "description": "Athena TO8 MSR with multiple CLINs"
+  },
   "Emmett": {
     "name": "Emmett (Magni HA)",
     "sheet_name": "CLIN Level Detail",
