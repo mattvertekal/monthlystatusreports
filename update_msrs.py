@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 MSR Update Orchestrator
-Coordinates updating all three MSRs (TO1, TO4, TO6) with timesheet data.
+Coordinates updating all three MSRs (TO1, TO8, TO6) with timesheet data.
 
 Supports two modes:
 1. Auto mode: python update_msrs.py "Jan-26" (finds latest MSRs automatically)
-2. Manual mode: python update_msrs.py --files to1.xlsx to4.xlsx to6.xlsx "Jan-26"
+2. Manual mode: python update_msrs.py --files to1.xlsx to8.xlsx to6.xlsx "Jan-26"
 """
 
 import argparse
@@ -16,27 +16,27 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from agents.to1_updater import update_to1_msr
-from agents.to4_updater import update_to4_msr
+from agents.to8_updater import update_to8_msr
 from agents.to6_updater import update_to6_msr
 from utils.timesheet_parser import parse_timesheet_csv, get_timesheets_for_month
 from utils.date_finder import parse_month_input, find_month_column, format_month_display
 from openpyxl import load_workbook
 
-# Default MSR directory
-MSR_BASE_DIR = Path.home() / "Documents" / "MSRs"
+# Default MSR directory (in project folder)
+MSR_BASE_DIR = Path(__file__).parent.parent / "MSRs"
 TEMPLATES_DIR = MSR_BASE_DIR / "templates"
 COMPLETED_DIR = MSR_BASE_DIR / "completed"
 
 # MSR file patterns (for finding files)
 MSR_PATTERNS = {
     "TO1": ["TO1", "Athena TO1"],
-    "TO4": ["TO4", "Athena TO4", "PIVOT"],
+    "TO8": ["TO8", "Athena TO8"],
     "TO6": ["TO6", "Athena TO6"]
 }
 
 # MSR output naming conventions
 # TO1: "Athena TO1 Vertekal MSR Dec 2025.xlsx"
-# TO4: "Athena TO4_PIVOT_OP3_Vertekal MSR_2025.12.xlsx"
+# TO8: "Athena TO8-Vertekal MSR_2026.01.xlsx"
 # TO6: "Athena TO6 Vertekal MSR Opt3 December 2025.xlsx"
 def get_msr_output_filename(msr_type: str, year: int, month: int) -> str:
     """Generate output filename matching the established naming convention."""
@@ -46,9 +46,9 @@ def get_msr_output_filename(msr_type: str, year: int, month: int) -> str:
     if msr_type == "TO1":
         # Format: "Athena TO1 Vertekal MSR Dec 2025.xlsx"
         return f"Athena TO1 Vertekal MSR {dt.strftime('%b')} {year}.xlsx"
-    elif msr_type == "TO4":
-        # Format: "Athena TO4_PIVOT_OP3_Vertekal MSR_2025.12.xlsx"
-        return f"Athena TO4_PIVOT_OP3_Vertekal MSR_{year}.{month:02d}.xlsx"
+    elif msr_type == "TO8":
+        # Format: "Athena TO8-Vertekal MSR_2026.01.xlsx"
+        return f"Athena TO8-Vertekal MSR_{year}.{month:02d}.xlsx"
     elif msr_type == "TO6":
         # Format: "Athena TO6 Vertekal MSR Opt3 December 2025.xlsx"
         return f"Athena TO6 Vertekal MSR Opt3 {dt.strftime('%B')} {year}.xlsx"
@@ -78,7 +78,7 @@ def find_latest_msr(msr_type: str, before_year: int, before_month: int) -> Optio
     then falls back to templates.
 
     Args:
-        msr_type: "TO1", "TO4", or "TO6"
+        msr_type: "TO1", "TO8", or "TO6"
         before_year: Target year (search for months before this)
         before_month: Target month (search for months before this)
 
@@ -127,7 +127,7 @@ def find_all_msrs(target_year: int, target_month: int) -> Dict[str, Optional[Pat
     """Find the latest MSR file for each type."""
     return {
         "TO1": find_latest_msr("TO1", target_year, target_month),
-        "TO4": find_latest_msr("TO4", target_year, target_month),
+        "TO8": find_latest_msr("TO8", target_year, target_month),
         "TO6": find_latest_msr("TO6", target_year, target_month)
     }
 
@@ -135,7 +135,7 @@ def find_all_msrs(target_year: int, target_month: int) -> Dict[str, Optional[Pat
 def update_all_msrs(
     timesheet_data: Dict[str, Dict[str, float]],
     to1_msr: str,
-    to4_msr: str,
+    to8_msr: str,
     to6_msr: str,
     month_str: str,
     output_dir: str = None
@@ -146,7 +146,7 @@ def update_all_msrs(
     Args:
         timesheet_data: Parsed timesheet data (from CSV or API)
         to1_msr: Path to TO1 MSR file
-        to4_msr: Path to TO4 MSR file
+        to8_msr: Path to TO8 MSR file
         to6_msr: Path to TO6 MSR file
         month_str: Month to update (e.g., "Jan-26", "February 2026")
         output_dir: Directory to save updated MSRs (default: completed/YYYY/MM-Mon/)
@@ -214,33 +214,33 @@ def update_all_msrs(
         print(f"   Error: {e}")
         results['TO1'] = {'error': str(e)}
 
-    # Update TO4
+    # Update TO8
     print("\n" + "-"*80)
-    print("Updating TO4 MSR...")
-    print(f"   Source: {to4_msr}")
+    print("Updating TO8 MSR...")
+    print(f"   Source: {to8_msr}")
     print("-"*80)
     try:
-        wb4 = load_workbook(to4_msr, data_only=True)
-        ws4 = wb4['CLIN 0001AD']
-        date_row = settings['TO4']['sheets']['CLIN 0001AD']['date_header_row']
-        col4 = find_month_column(ws4, date_row, target_year, target_month)
-        wb4.close()
+        wb8 = load_workbook(to8_msr, data_only=True)
+        ws8 = wb8['CLIN 0001AA']
+        date_row = settings['TO8']['sheets']['CLIN 0001AA']['date_header_row']
+        col8 = find_month_column(ws8, date_row, target_year, target_month)
+        wb8.close()
 
-        if col4:
-            print(f"   Found column: {col4}")
-            output4 = output_dir / get_msr_output_filename("TO4", target_year, target_month)
-            result4 = update_to4_msr(to4_msr, timesheet_data, col4, str(output4))
-            results['TO4'] = result4
-            print(f"   CLIN 0001AD: {result4['clin_0001ad_hours']:.2f} hours")
-            print(f"   CLIN 0002AD: {result4['clin_0002ad_hours']:.2f} hours")
-            print(f"   Total: {result4['total_hours']:.2f} hours")
-            print(f"   Saved: {output4}")
+        if col8:
+            print(f"   Found column: {col8}")
+            output8 = output_dir / get_msr_output_filename("TO8", target_year, target_month)
+            result8 = update_to8_msr(to8_msr, timesheet_data, col8, str(output8))
+            results['TO8'] = result8
+            print(f"   CLIN 0001AA: {result8['clin_0001aa_hours']:.2f} hours")
+            print(f"   CLIN 0002AA: {result8['clin_0002aa_hours']:.2f} hours")
+            print(f"   Total: {result8['total_hours']:.2f} hours")
+            print(f"   Saved: {output8}")
         else:
             print(f"   Could not find column for {month_display}")
-            results['TO4'] = {'error': 'Column not found'}
+            results['TO8'] = {'error': 'Column not found'}
     except Exception as e:
         print(f"   Error: {e}")
-        results['TO4'] = {'error': str(e)}
+        results['TO8'] = {'error': str(e)}
 
     # Update TO6
     print("\n" + "-"*80)
@@ -290,7 +290,7 @@ Examples:
   python update_msrs.py "Jan-26"
 
   # Specify MSR files manually:
-  python update_msrs.py --files to1.xlsx to4.xlsx to6.xlsx "Jan-26"
+  python update_msrs.py --files to1.xlsx to8.xlsx to6.xlsx "Jan-26"
 
   # Use CSV instead of TSheets API:
   python update_msrs.py --csv timesheet.csv "Jan-26"
@@ -298,7 +298,7 @@ Examples:
     )
 
     parser.add_argument('month', help='Month to update (e.g., "Jan-26", "February 2026")')
-    parser.add_argument('--files', nargs=3, metavar=('TO1', 'TO4', 'TO6'),
+    parser.add_argument('--files', nargs=3, metavar=('TO1', 'TO8', 'TO6'),
                         help='Manually specify MSR files')
     parser.add_argument('--csv', type=str, default=None,
                         help='Use CSV file instead of TSheets API')
@@ -316,7 +316,7 @@ Examples:
 
     # Find or use specified MSR files
     if args.files:
-        to1_msr, to4_msr, to6_msr = args.files
+        to1_msr, to8_msr, to6_msr = args.files
     else:
         print("Searching for latest MSR files...")
         msr_files = find_all_msrs(target_year, target_month)
@@ -331,11 +331,11 @@ Examples:
             sys.exit(1)
 
         to1_msr = str(msr_files['TO1'])
-        to4_msr = str(msr_files['TO4'])
+        to8_msr = str(msr_files['TO8'])
         to6_msr = str(msr_files['TO6'])
 
         print(f"  TO1: {to1_msr}")
-        print(f"  TO4: {to4_msr}")
+        print(f"  TO8: {to8_msr}")
         print(f"  TO6: {to6_msr}")
 
     # Get timesheet data
@@ -350,7 +350,7 @@ Examples:
     update_all_msrs(
         timesheet_data=timesheet_data,
         to1_msr=to1_msr,
-        to4_msr=to4_msr,
+        to8_msr=to8_msr,
         to6_msr=to6_msr,
         month_str=args.month,
         output_dir=args.output

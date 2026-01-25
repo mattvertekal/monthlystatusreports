@@ -24,8 +24,8 @@ EMPLOYEE_RATES = {
     "Philip Yang": 211.15
 }
 
-# WSR folder paths
-WSR_BASE_DIR = Path.home() / "Documents" / "WSR"
+# WSR folder paths (in project folder)
+WSR_BASE_DIR = Path(__file__).parent.parent.parent / "WSR"
 TEMPLATES_DIR = WSR_BASE_DIR / "templates"
 COMPLETED_DIR = WSR_BASE_DIR / "completed"
 
@@ -71,7 +71,7 @@ def format_week_label(start_date: str, end_date: str) -> str:
 
 
 def get_tsheets_hours_for_week(start_date: str, end_date: str) -> Dict[str, float]:
-    """Fetch hours from TSheets for a specific week."""
+    """Fetch Emmett hours from TSheets for a specific week."""
     import requests
 
     config_dir = Path(__file__).parent.parent / 'config'
@@ -81,6 +81,18 @@ def get_tsheets_hours_for_week(start_date: str, end_date: str) -> Dict[str, floa
     headers = {"Authorization": f"Bearer {config['api_token']}"}
     base_url = config['base_url']
 
+    # Get jobcodes to filter for Emmett only
+    jc_response = requests.get(f"{base_url}/jobcodes", headers=headers)
+    jc_response.raise_for_status()
+    jobcodes = jc_response.json().get('results', {}).get('jobcodes', {})
+
+    # Build set of Emmett job code IDs
+    emmett_jobcode_ids = set()
+    for jc_id, jc in jobcodes.items():
+        if 'Emmett' in jc['name']:
+            emmett_jobcode_ids.add(int(jc_id))
+
+    # Fetch timesheets
     params = {"start_date": start_date, "end_date": end_date}
     response = requests.get(f"{base_url}/timesheets", headers=headers, params=params)
     response.raise_for_status()
@@ -91,7 +103,12 @@ def get_tsheets_hours_for_week(start_date: str, end_date: str) -> Dict[str, floa
 
     for ts_id, ts in timesheets.items():
         user_id = str(ts['user_id'])
+        jobcode_id = ts['jobcode_id']
         duration = ts.get('duration', 0) / 3600.0
+
+        # Skip if not an Emmett job code
+        if jobcode_id not in emmett_jobcode_ids:
+            continue
 
         if user_id not in user_map:
             continue
